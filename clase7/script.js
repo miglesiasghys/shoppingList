@@ -16,10 +16,12 @@ const addItem=()=>{
     $('listForm').reset()
 }
 
+$('addButton').addEventListener('click', addItem)
+
 const createList=(lista)=>{
-    //este innet html lo que hace es iniciarme desde un html vacio la funcion 
+    //este innerhtml lo que hace es iniciarme desde un array vacio la funcion 
     $('list').innerHTML=[]
-    lista.forEach(item => {
+    lista.forEach(item, index => {
         let liItem=document.createElement('li');
         let liContent= document.createTextNode(`${item}`);
         liItem.appendChild(liContent);
@@ -33,15 +35,13 @@ const createList=(lista)=>{
     
         let editeBtn=document.createElement('button')
         liItem.appendChild(editeBtn)
-        editeBtn.classList.add('btn')
+        editeBtn.classList.add ('btn')
         editeBtn.innerText='-'
         editeBtn.addEventListener('click', ()=>editeItem(item))
     
         $('list').appendChild(liItem)
     });
 }
-
-$('addButton').addEventListener('click', addItem)
 
 //funcion para eliminar
 const deleteItem= (item)=>{
@@ -52,7 +52,6 @@ const deleteItem= (item)=>{
 }
 
 //funcion para editar los elementos
-
 const editeItem=(item)=>{
     let newValue= prompt('Cambiar').toUpperCase()
     const itemIndex= shoppingList.indexOf(item)
@@ -61,5 +60,18 @@ const editeItem=(item)=>{
 }
 
 //ejecutar la funcion con un enter
-
 $('newItemInput').addEventListener('keydown', (event)=> {if (event.key === 'Enter') {addItem()}})
+
+//modo claro/modo oscuro
+
+const changeMode = () =>{
+    if ($('body').getAttribute('data-theme') === 'light'){
+        $('body').setAttribute('data-theme','dark');
+
+    }else{
+        $('body').setAttribute('data-theme','light');
+        
+    }
+}
+
+$('modeBtn').addEventListener('click', changeMode)
