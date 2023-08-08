@@ -16,12 +16,10 @@ const addItem=()=>{
     $('listForm').reset()
 }
 
-$('addButton').addEventListener('click', addItem)
-
 const createList=(lista)=>{
     //este innerhtml lo que hace es iniciarme desde un array vacio la funcion 
     $('list').innerHTML=[]
-    lista.forEach(item, index => {
+    lista.forEach(item=> {
         let liItem=document.createElement('li');
         let liContent= document.createTextNode(`${item}`);
         liItem.appendChild(liContent);
@@ -59,6 +57,9 @@ const editeItem=(item)=>{
     return createList(shoppingList)
 }
 
+
+$('addButton').addEventListener('click', addItem)
+
 //ejecutar la funcion con un enter
 $('newItemInput').addEventListener('keydown', (event)=> {if (event.key === 'Enter') {addItem()}})
 
@@ -70,7 +71,6 @@ const changeMode = () =>{
 
     }else{
         $('body').setAttribute('data-theme','light');
-        
     }
 }
 
